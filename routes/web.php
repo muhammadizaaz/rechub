@@ -20,15 +20,14 @@ Route::get('/', function () {
 });
 
 
-//auth route for admin
-Route::group(['middleware' => ['auth']], function() { 
-    Route::get('/admin',[DashboardController::class,'index'])->name('dashboard');
-    Route::get('/admin/participant_data',[TablesController::class,'index'])->name('participant_data');
+//auth route for wedding organizer
+Route::group(['middleware' => ['auth', 'role:wo']], function() { 
+    Route::get('/admin',[DashboardController::class,'index'])->name('wo.dashboard');
 });
 
-// for participants
-Route::group(['middleware' => ['auth', 'role:participant']], function() { 
-    Route::get('/dashboard/myprofile', [DashboardController::class, 'myprofile'])->name('dashboard.myprofile');
+// for user
+Route::group(['middleware' => ['auth', 'role:user']], function() { 
+    Route::get('/dashboard/myprofile', [DashboardController::class, 'myprofile'])->name('user.profile');
 });
 
 require __DIR__.'/auth.php';

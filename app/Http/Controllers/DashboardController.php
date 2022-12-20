@@ -10,8 +10,8 @@ class DashboardController extends Controller
    public function index()
    {
        if(Auth::user()->hasRole('user')){
-            return view('userdash');
-       }elseif(Auth::user()->hasRole('admin')){
+            return view('user.dahsboard');
+       }elseif(Auth::user()->hasRole('wo')){
         return view('dashboard');
    }
    }

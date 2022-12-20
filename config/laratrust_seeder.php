@@ -12,13 +12,13 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-        'admin' => [
+        'wo' => [
             'users' => 'c,r,u,d',
             'payments' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'participant' => [
-            'profile' => 'r,u',
+        'user' => [
+            'profile' => 'c,r,u,d',
         ]
     ],
 
