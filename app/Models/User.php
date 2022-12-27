@@ -6,12 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laratrust\Traits\LaratrustUserTrait;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -43,8 +42,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function status()
+    public function company()
     {
-        return $this->hasOne(Status::class);
+        return $this->hasOne('App\Models\Company');
+    }
+
+    //piviot for saved jobs
+    public function posts()
+    {
+        return $this->belongsToMany('App\Models\Post');
+    }
+
+    public function applied()
+    {
+        return $this->hasMany('App\Models\JobApplication');
     }
 }
